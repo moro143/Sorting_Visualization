@@ -38,6 +38,9 @@ while running:
                 method = "selection"
                 idx = 0
                 idxDone = 0
+            elif event.key == pygame.K_i:
+                method = "insertion"
+                idx = 1
 
     if method == "bubble":
         if idx == len(lista)-1:
@@ -56,6 +59,15 @@ while running:
         lista[idxDone], lista[minIdx] = lista[minIdx], lista[idxDone]
         idxDone += 1
         clock.tick(30)
+
+    elif method == "insertion":
+        tmp = lista[idx]
+        for i in range(len(lista[:idx])):
+            if lista[idx-i-1]>lista[idx-i]:
+                lista[idx-i-1], lista[idx-i] = lista[idx-i], lista[idx-i-1]
+        idx+=1
+        if idx==len(lista):
+            method = None
 
     l = size[0]/len(lista)
     d = size[1]/max(lista)
