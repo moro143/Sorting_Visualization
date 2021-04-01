@@ -5,6 +5,12 @@ import random
 class SortingVisualization:
     def __init__(self):
         self.listToSort = [1]
+    
+    def randomize(self, length = 100, maximal=10000):
+        self.listToSort = []
+        for _ in range(length):
+            self.listToSort.append(random.randint(0, maximal))
+
     def visualize(self, size=(500, 500), color=(0, 200, 0), bgcolor=(0,0,0)):
         pygame.init()
         screen = pygame.display.set_mode(size)
@@ -18,15 +24,12 @@ class SortingVisualization:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_p:
                         method = None
                     elif event.key == pygame.K_r:
                         method = None
-                        self.listToSort = []
-                        for i in range(100):
-                            self.listToSort.append(random.randint(0, 10000))
+                        self.randomize()
                     elif event.key == pygame.K_b:
                         method = "bubble"
                         idx = 0
