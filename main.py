@@ -1,5 +1,6 @@
 import pygame
 import math
+import numpy as np
 import random
 
 class SortingVisualization:
@@ -11,7 +12,7 @@ class SortingVisualization:
         for _ in range(length):
             self.listToSort.append(random.randint(0, maximal))
 
-    def visualize(self, size=(500, 500), color=(0, 200, 0), bgcolor=(0,0,0)):
+    def visualize(self, size=(500, 500), color=np.array([0, 200, 0]), bgcolor=(0,0,0)):
         pygame.init()
         screen = pygame.display.set_mode(size)
 
@@ -73,10 +74,11 @@ class SortingVisualization:
             d = size[1]/max(self.listToSort)
             h = 0
             for i in self.listToSort:
-                pygame.draw.rect(screen, color, (int(h*l), size[1]-d*i, math.ceil(l), d*i))
+                pygame.draw.rect(screen, color*i/max(self.listToSort), (int(h*l), size[1]-d*i, math.ceil(l), d*i))
                 h+=1
             
             pygame.display.update()
 
 test = SortingVisualization()
-test.visualize()
+test.randomize(500, 500)
+test.visualize((1000,500))
